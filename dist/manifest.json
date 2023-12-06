@@ -1,0 +1,13 @@
+{
+  "src/main.js": {
+    "file": "main-b24704c9.js",
+    "src": "src/main.js",
+    "isEntry": true,
+    "imports": [
+      "_vendors-984ec5ed.js"
+    ]
+  },
+  "_vendors-984ec5ed.js": {
+    "file": "vendors-984ec5ed.js"
+  }
+}
