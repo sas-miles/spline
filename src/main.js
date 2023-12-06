@@ -1,6 +1,6 @@
 import { Application } from '@splinetool/runtime';
 import barba from '@barba/core';
-import { gsap } from "gsap";
+import { gsap } from "gsap/dist/gsap";
 
 let spline, obj;
 let isToggled = false;
