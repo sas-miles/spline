@@ -14,6 +14,8 @@
     "vite-plugin-glsl": "^0.1.1"
   },
   "dependencies": {
-    "gsap": "^3.9.1"
+    "@barba/core": "^2.9.7",
+    "@splinetool/runtime": "^0.9.518",
+    "gsap": "^3.12.3"
   }
 }
