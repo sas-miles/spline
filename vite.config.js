@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import glsl from 'vite-plugin-glsl';
 
+// vite.config.js
 export default defineConfig({
   plugins: [glsl()],
   server: {
@@ -18,8 +19,7 @@ export default defineConfig({
       input: './src/main.js',
       output: {
         format: 'es',
-        entryFileNames: '[name]-[hash].js',
-        chunkFileNames: '[name]-[hash].js',
+        entryFileNames: 'main.js',
         esModule: false,
         compact: true,
         globals: {
@@ -27,13 +27,6 @@ export default defineConfig({
         },
       },
       external: ['jquery'],
-      manualChunks(id) {
-        if (id.includes('node_modules')) {
-          // Logic to split vendor modules into separate chunks
-          const modules = ['react', 'react-dom']; // Example modules, adjust as needed
-          return modules.find(module => id.includes(module)) || 'vendors';
-        }
-      },
     },
   },
-});
+})
