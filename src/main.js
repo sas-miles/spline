@@ -2,27 +2,13 @@ import { Application } from '@splinetool/runtime';
 import barba from '@barba/core';
 import { gsap } from "gsap";
 
-let spline, obj;
-let isToggled = false;
-
-function setInitialState() {
-    return new Promise((resolve) => {
-        if (window.location.pathname === '/spline-03-02') {
-            isToggled = true;
-            spline.emitEvent('mouseDown', obj.name); // Trigger as if clicked
-            resolve(); // Resolve the promise after setting the state
-        } else {
-            isToggled = false;
-            resolve();
-        }
-    });
-}
+let spline, obj1, obj2;
 
 function fadeInCanvas() {
     gsap.to('#canvas3d', {
         visibility: 'visible',
         opacity: 1,
-        duration: 1 // Duration of fade-in effect
+        duration: 1
     });
 }
 
@@ -34,30 +20,13 @@ function initSpline() {
 
     spline.load('https://prod.spline.design/zBBaOmVltDuUag17/scene.splinecode')
     .then(() => {
-        obj = spline.findObjectById('1abf83a1-5d8c-4819-a952-7bcd8afbcb11');
-        setInitialState().then(() => {
-            // Add a delay before fading in the canvas
-            setTimeout(() => {
-                fadeInCanvas();
-            }, 500); // Delay in milliseconds
-        });
+        obj1 = spline.findObjectById('1abf83a1-5d8c-4819-a952-7bcd8afbcb11');
+        obj2 = spline.findObjectById('0656b222-e1ba-4f9f-8d6d-a23ba4b286f6');
+        fadeInCanvas();
     });
 }
 
-function handleClick(event) {
-    if (event.target.classList.contains('click-text')) {
-        isToggled = !isToggled;
-        if (isToggled) {
-            spline.emitEvent('mouseDown', obj.name);
-        } else {
-            spline.emitEventReverse('mouseDown', obj.name);
-        }
-    }
-}
-
-const staticParent = document.body;
-staticParent.addEventListener('click', handleClick);
-
+// Setup event listeners after Barba transitions
 barba.init({
     transitions: [{
         leave(data) {
@@ -65,8 +34,29 @@ barba.init({
         },
         enter(data) {
             return gsap.from(data.next.container, { opacity: 0 });
+        },
+        afterEnter() {
+            setupEventListeners();
         }
     }]
 });
 
+function setupEventListeners() {
+    const clickText1 = document.querySelector('.click-text1');
+    const clickText2 = document.querySelector('.click-text2');
+
+    if (clickText1) {
+        clickText1.addEventListener('click', () => {
+            spline.emitEvent('mouseDown', obj1.name);
+        });
+    }
+
+    if (clickText2) {
+        clickText2.addEventListener('click', () => {
+            spline.emitEvent('mouseDown', obj2.name);
+        });
+    }
+}
+
 initSpline(); // Initial call to setup Spline
+setupEventListeners(); // Setup event listeners initially
