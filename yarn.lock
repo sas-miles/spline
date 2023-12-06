@@ -1321,7 +1321,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^2.7.2":
+"vite@npm:^2.9.16":
   version: 2.9.16
   resolution: "vite@npm:2.9.16"
   dependencies:
@@ -1359,7 +1359,7 @@ __metadata:
     gsap: ^3.12.3
     jquery: ^3.6.0
     rimraf: ^3.0.2
-    vite: ^2.7.2
+    vite: ^2.9.16
     vite-plugin-glsl: ^0.1.1
   languageName: unknown
   linkType: soft
